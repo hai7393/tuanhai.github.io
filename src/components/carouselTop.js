@@ -6,7 +6,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-const CarouselTop = ({data}) => {
+import {COLORS} from '../../contains/theme'
+const CarouselTop = ({ data }) => {
     const navigation = useNavigation();
     const myIcon = <Icon name="star" size={10} color="yellow" />;
     const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
@@ -19,8 +20,13 @@ const CarouselTop = ({data}) => {
             x.value = event.contentOffset.x;
         }
     })
-    
+
     return (
+        <>
+        <View style={styles.wrapperText}>
+            <Text style={{ color: COLORS.second }}>BARU TAYANG HARI INI</Text>
+            <Text style={{ color: COLORS.title }}>LIHAT SEMUA</Text>
+          </View>
         <Animated.ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -35,18 +41,20 @@ const CarouselTop = ({data}) => {
                 }
                 return (
                     <TouchableOpacity style={{ width: size }}
+                        key={index}
                         onPress={() => navigation.navigate('DetailScreen')}
-                        >
+                    >
                         <Animated.View style={[styles.imageContainer]}>
                             <Image source={item.image} style={styles.image}
                             />
                         </Animated.View>
-                        <Text style={styles.text1}>ONE PIECE FILM RED</Text>
-                        <Text style={styles.text2}>RATING  {myIcon}  7.2</Text>
+                        <Text style={styles.text1}>{item.title}</Text>
+                        <Text style={styles.text2}>{item.rate} {myIcon}</Text>
                     </TouchableOpacity>
                 )
             })}
         </Animated.ScrollView>
+        </>
     )
 }
 
@@ -75,4 +83,9 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         lineHeight: 18
     },
+    wrapperText:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginHorizontal:12
+    }
 });

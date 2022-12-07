@@ -16,7 +16,8 @@ import { MD2DarkTheme } from 'react-native-paper';
 import { MD2LightTheme } from 'react-native-paper';
 import merge from 'deepmerge';
 import HomeScreens from '../screens/HomeScreens/HomeScreens';
-import DetailScreen from '../screens/HomeScreens/DetailScreen';
+import DetailScreen from '../screens/DetailScreens/DetailScreen';
+import Notification from '../screens/Notification';
 const Drawer = createDrawerNavigator();
 export default function AppNavigation() {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
@@ -41,6 +42,7 @@ export default function AppNavigation() {
         drawerContent={props => <DrawerContent toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} {...props} />}>
         <Drawer.Screen name="HomeScreens" component={HomeScreens} />
         <Drawer.Screen name="DetailScreen" component={DetailScreen} />
+        <Drawer.Screen name="Notification" component={Notification} />
       </Drawer.Navigator>
     </NavigationContainer>
 

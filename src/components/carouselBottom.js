@@ -7,6 +7,7 @@ import Animated, {
     interpolate
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {COLORS} from '../../contains/theme'
 const CarouselBottom = ({ data }) => {
     const myIcon = <Icon name="star" size={10} color="yellow" />;
     const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
@@ -20,6 +21,11 @@ const CarouselBottom = ({ data }) => {
         }
     })
     return (
+        <>
+        <View style={styles.wrapperText}>
+            <Text style={{ color: COLORS.second }}>BARU TAYANG HARI INI</Text>
+            <Text style={{ color: COLORS.title }}>LIHAT SEMUA</Text>
+          </View>
         <Animated.ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -43,16 +49,17 @@ const CarouselBottom = ({ data }) => {
                     return <View style={{ width: spacer }} key={index} />
                 }
                 return (
-                    <View style={{ width: size }}>
+                    <View style={{ width: size }} key={index}>
                         <Animated.View style={[styles.imageContainer,style]}>
                             <Image source={item.image} style={styles.image} />
                         </Animated.View>
-                        <Text style={styles.text1}>ONE PIECE FILM RED</Text>
-                        <Text style={styles.text2}>RATING  {myIcon}  7.2</Text>
+                        <Text style={styles.text1}>{item.title}</Text>
+                        <Text style={styles.text2}>{item.rate} {myIcon}</Text>
                     </View>
                 )
             })}
         </Animated.ScrollView>
+        </>
     )
 }
 
@@ -81,4 +88,9 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         lineHeight: 18
     },
+    wrapperText:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginHorizontal:12
+    }
 });

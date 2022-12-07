@@ -1,9 +1,8 @@
-import { StyleSheet } from "react-native";
-
+import { Dimensions, StyleSheet } from "react-native";
+const height = Dimensions.get('window').height - 120;
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
-        backgroundColor: "red"
+        height:height/2,
     },
     footer: {
         height: 100,
@@ -69,19 +68,6 @@ const styles = StyleSheet.create({
         height: 220,
         borderRadius: 15
     },
-    
-    textFooter:{
-        width:250,
-        height:44,
-        backgroundColor:"#FF985F",
-        justifyContent:"center",
-        alignItems:"center",
-        flexDirection:"row",
-        borderRadius:40
-    },
-    iconFooter:{
-        marginHorizontal:10
-    }
 
 })
 export default styles

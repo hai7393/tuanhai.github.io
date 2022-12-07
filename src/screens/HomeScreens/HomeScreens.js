@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView ,Button} from 'react-native'
+import { View, Text, SafeAreaView, Button } from 'react-native'
 import React from 'react'
 import { useTheme } from 'react-native-paper';
 import HeaderComponents from '../../components/headerHome';
@@ -8,28 +8,48 @@ import { StatusBar } from 'expo-status-bar';
 import Footer from '../../components/footer';
 import CarouselTop from '../../components/carouselTop';
 import CarouselBottom from '../../components/carouselBottom';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+
 const HomeScreens = () => {
+  
   const navigation = useNavigation();
   const theme = useTheme();
   const data = [
     {
-      image: images.rectangle4
+      id:'1',
+      image: images.rectangle4,
+      title:'ONE PIECE FILM RED',
+      rate:'RATING 7.2'
     },
     {
-      image: images.rectangle5
+      id:'2',
+      image: images.rectangle5,
+      title:'ONE PIECE FILM RED',
+      rate:'RATING 7.2'
     },
     {
-      image: images.rectangle6
+      id:'3',
+      image: images.rectangle6,
+      title:'ONE PIECE FILM RED',
+      rate:'RATING 7.2'
     },
     {
-      image: images.rectangle1
+      id:'4',
+      image: images.rectangle1,
+      title:'ONE PIECE FILM RED',
+      rate:'RATING 7.2'
     },
     {
-      image: images.rectangle2
+      id:'5',
+      image: images.rectangle2,
+      title:'ONE PIECE FILM RED',
+      rate:'RATING 7.2'
     },
     {
-      image: images.rectangle3
+      id:'6',
+      image: images.rectangle3,
+      title:'ONE PIECE FILM RED',
+      rate:'RATING 7.2'
     },
   ];
   return (
@@ -38,27 +58,13 @@ const HomeScreens = () => {
       <HeaderComponents navigation={navigation} />
       <View style={styles.container} theme={theme}>
         <View style={styles.wrapperTop}>
-          <View style={styles.wrapperText}>
-            <Text style={{ color: "#FFFFFF" }}>BARU TAYANG HARI INI</Text>
-            <Text style={{ color: "#A09E9E" }}>LIHAT SEMUA</Text>
-          </View>
-          <SafeAreaView>
-            <CarouselTop data={data} />
-          </SafeAreaView>
+          <CarouselTop data={data} />
         </View>
         <View style={styles.wrapperBottom}>
-          <View style={styles.wrapperText}>
-            <Text style={{ color: "#FFFFFF" }}>BARU TAYANG HARI INI</Text>
-            <Text style={{ color: "#A09E9E" }}>LIHAT SEMUA</Text>
-          </View>
-          <SafeAreaView>
-            <CarouselBottom data={data} />
-          </SafeAreaView>
+          <CarouselBottom data={data} />
         </View>
       </View>
-      <View style={styles.footer}>
-        <Footer />
-      </View>
+      <Footer />
     </>
   )
 }
