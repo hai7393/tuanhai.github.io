@@ -77,7 +77,7 @@ const DetailScreen = ({ navigation }) => {
 
                     </View>
                     <View style={styles.containerTopic}>
-                        {topic.map((item,index) => {
+                        {topic?.map((item,index) => {
                             return <TouchableOpacity style={styles.boxTopic} key={index}>
                                 <Text style={styles.textTopic}>{item.title}</Text>
                             </TouchableOpacity>
