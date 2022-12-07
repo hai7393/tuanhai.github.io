@@ -6,8 +6,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {COLORS} from '../../contains/theme'
+import {COLORS} from '../../contains/theme';
+import {toggleMovie} from '../../store/slices/movie'
+import { useDispatch } from 'react-redux';
 const CarouselTop = ({ data }) => {
+    const dispatch = useDispatch() 
+    console.log(data);
     const navigation = useNavigation();
     const myIcon = <Icon name="star" size={10} color="yellow" />;
     const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
@@ -20,7 +24,10 @@ const CarouselTop = ({ data }) => {
             x.value = event.contentOffset.x;
         }
     })
-
+    const changeMovie = (data)=>{
+        console.log(data)
+        dispatch(toggleMovie({name:data.title}))
+    }
     return (
         <>
         <View style={styles.wrapperText}>
@@ -42,7 +49,7 @@ const CarouselTop = ({ data }) => {
                 return (
                     <TouchableOpacity style={{ width: size }}
                         key={index}
-                        onPress={() => navigation.navigate('DetailScreen')}
+                        onPress={(data) => changeMovie(data)}
                     >
                         <Animated.View style={[styles.imageContainer]}>
                             <Image source={item.image} style={styles.image}
