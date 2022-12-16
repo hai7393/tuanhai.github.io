@@ -1,12 +1,18 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView,FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from 'react-native-paper';
 import HeaderDetail from '../../components/headerDetail';
-import Video from 'react-native-video';
 import images from '../../../contains/images';
-import {COLORS} from '../../../contains/theme'
-const DetailScreen = ({ navigation }) => {
+import {COLORS} from '../../../contains/theme';
+import { fetchMovieDetailById } from '../../../store/slices/movie';
+import { useDispatch } from 'react-redux';
+const DetailScreen = ({ navigation,route }) => {
+    const {id} = route.params
+    // const dispatch = useDispatch();
+    // useEffect(()=>{
+    //     dispatch(fetchMovieDetailById({id:id}))
+    // },[])
     const theme = useTheme();
     const image = [
         {

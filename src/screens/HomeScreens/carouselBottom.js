@@ -7,10 +7,10 @@ import Animated, {
     interpolate
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {COLORS} from '../../contains/theme'
+import {COLORS} from '../../../contains/theme'
 const CarouselBottom = ({ data }) => {
     const myIcon = <Icon name="star" size={10} color="yellow" />;
-    const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
+    // const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
     const { width } = useWindowDimensions();
     const size = width * 0.6;
     const spacer = (width - size) / 12;
@@ -34,7 +34,7 @@ const CarouselBottom = ({ data }) => {
             decelerationRate="fast"
             onScroll={onScroll}
         >
-            {newData.map((item, index) => {
+            {data?.map((item, index) => {
                 const style = useAnimatedStyle(() => {
                     const scale = interpolate(
                         x.value,
@@ -45,16 +45,16 @@ const CarouselBottom = ({ data }) => {
                         transform: [{ scale }],
                     };
                 })
-                if (!item.image) {
+                if (!item.backdrop_path) {
                     return <View style={{ width: spacer }} key={index} />
                 }
                 return (
                     <View style={{ width: size }} key={index}>
                         <Animated.View style={[styles.imageContainer,style]}>
-                            <Image source={item.image} style={styles.image} />
+                            <Image source={{uri:`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}} style={styles.image} />
                         </Animated.View>
                         <Text style={styles.text1}>{item.title}</Text>
-                        <Text style={styles.text2}>{item.rate} {myIcon}</Text>
+                        <Text style={styles.text2}>{item.vote_average} {myIcon}</Text>
                     </View>
                 )
             })}

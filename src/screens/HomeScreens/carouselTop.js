@@ -6,15 +6,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {COLORS} from '../../contains/theme';
-import {toggleMovie} from '../../store/slices/movie'
-import { useDispatch } from 'react-redux';
+import {COLORS} from '../../../contains/theme';
 const CarouselTop = ({ data }) => {
-    const dispatch = useDispatch() 
-    console.log(data);
     const navigation = useNavigation();
     const myIcon = <Icon name="star" size={10} color="yellow" />;
-    const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
+    // const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
     const { width } = useWindowDimensions();
     const size = width * 0.6;
     const spacer = (width - size) / 12;
@@ -24,9 +20,8 @@ const CarouselTop = ({ data }) => {
             x.value = event.contentOffset.x;
         }
     })
-    const changeMovie = (data)=>{
-        console.log(data)
-        dispatch(toggleMovie({name:data.title}))
+    const changeMovie = (id)=>{
+        navigation.navigate('DetailScreen',{id})
     }
     return (
         <>
@@ -42,21 +37,21 @@ const CarouselTop = ({ data }) => {
             decelerationRate="fast"
             onScroll={onScroll}
         >
-            {newData.map((item, index) => {
-                if (!item.image) {
+            {data?.map((item, index) => {
+                if (!item.backdrop_path) {
                     return <View style={{ width: spacer }} key={index} />
                 }
                 return (
                     <TouchableOpacity style={{ width: size }}
                         key={index}
-                        onPress={(data) => changeMovie(data)}
+                        onPress={() => changeMovie(item.id)}
                     >
                         <Animated.View style={[styles.imageContainer]}>
-                            <Image source={item.image} style={styles.image}
+                            <Image source={{uri:`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}} style={styles.image}
                             />
                         </Animated.View>
                         <Text style={styles.text1}>{item.title}</Text>
-                        <Text style={styles.text2}>{item.rate} {myIcon}</Text>
+                        <Text style={styles.text2}>{item.vote_average} {myIcon}</Text>
                     </TouchableOpacity>
                 )
             })}

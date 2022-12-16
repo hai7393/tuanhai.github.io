@@ -1,67 +1,41 @@
 import { View, Text, SafeAreaView, Button } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTheme } from 'react-native-paper';
 import HeaderComponents from '../../components/headerHome';
 import styles from './style';
 import images from '../../../contains/images';
 import { StatusBar } from 'expo-status-bar';
 import Footer from '../../components/footer';
-import CarouselTop from '../../components/carouselTop';
-import CarouselBottom from '../../components/carouselBottom';
+import CarouselTop from './carouselTop';
+import CarouselBottom from './carouselBottom';
 import { useNavigation } from '@react-navigation/native';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMovieTopRated } from '../../../store/slices/movie';
+import { fetchMoviePopular } from '../../../store/slices/movie';
 const HomeScreens = () => {
-  
+  const dispatch = useDispatch();
+  const movieTopRated = useSelector(state => state.movie.movieTopRated.results)
+  const moviePopulars = useSelector(state => state.movie.moviePopular.results)
+  useEffect(() => {
+    fetchMovie();
+  }, [])
+  const fetchMovie = async () => {
+    await dispatch(fetchMovieTopRated());
+    dispatch(fetchMoviePopular());
+  }
   const navigation = useNavigation();
   const theme = useTheme();
-  const data = [
-    {
-      id:'1',
-      image: images.rectangle4,
-      title:'ONE PIECE FILM RED',
-      rate:'RATING 7.2'
-    },
-    {
-      id:'2',
-      image: images.rectangle5,
-      title:'ONE PIECE FILM RED',
-      rate:'RATING 7.2'
-    },
-    {
-      id:'3',
-      image: images.rectangle6,
-      title:'ONE PIECE FILM RED',
-      rate:'RATING 7.2'
-    },
-    {
-      id:'4',
-      image: images.rectangle1,
-      title:'ONE PIECE FILM RED',
-      rate:'RATING 7.2'
-    },
-    {
-      id:'5',
-      image: images.rectangle2,
-      title:'ONE PIECE FILM RED',
-      rate:'RATING 7.2'
-    },
-    {
-      id:'6',
-      image: images.rectangle3,
-      title:'ONE PIECE FILM RED',
-      rate:'RATING 7.2'
-    },
-  ];
+  
   return (
     <>
       <StatusBar style='light' />
       <HeaderComponents navigation={navigation} />
       <View style={styles.container} theme={theme}>
         <View style={styles.wrapperTop}>
-          <CarouselTop data={data} />
+          <CarouselTop data={movieTopRated} />
         </View>
         <View style={styles.wrapperBottom}>
-          <CarouselBottom data={data} />
+          <CarouselBottom data={moviePopulars} />
         </View>
       </View>
       <Footer />
