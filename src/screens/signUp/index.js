@@ -1,23 +1,35 @@
-import { View, Text ,TextInput,Button} from 'react-native'
+import { View, Text ,TextInput } from 'react-native'
 import React from 'react'
 import styles from './style'
-const SignUp = () => {
+import DismissKeyboard from '../../components/DismissKeyboard'
+import {Button} from '../../components/button'
+const SignUp = ({children}) => {
+  
   return (
-    <View style ={styles.container}>
-      <Text>SignUp</Text>
-      <TextInput
-          placeholder="Email.."
-          autoCapitalize="none"
-          style={styles.textInput}
-          
-        />
+    <DismissKeyboard>
+      <>
+      <View style ={styles.container}>
+        <Text>SignUp</Text>
         <TextInput
-          placeholder="Password"
-          autoCapitalize="none"
-          style={styles.textInput}
-        />
-        <Button title="Sign Up" />
-    </View>
+            placeholder="Email.."
+            autoCapitalize="none"
+            style={styles.textInput}
+            
+          />
+          <TextInput
+            placeholder="Password"
+            autoCapitalize="none"
+            style={styles.textInput}
+          />
+         
+      </View>
+      <Button 
+            title="Sign Up"
+            onPress={() => {}
+          }
+          />
+          </>
+    </DismissKeyboard>
   )
 }
 
