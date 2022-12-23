@@ -1,18 +1,21 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, SafeAreaView,FlatList } from 'react-native'
-import React, { useEffect } from 'react'
-import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react'
 import { useTheme } from 'react-native-paper';
-import HeaderDetail from '../../components/headerDetail';
 import images from '../../../contains/images';
 import {COLORS} from '../../../contains/theme';
 import { fetchMovieDetailById } from '../../../store/slices/movie';
 import { useDispatch } from 'react-redux';
 const DetailScreen = ({ navigation,route }) => {
     const {id} = route.params
-    // const dispatch = useDispatch();
-    // useEffect(()=>{
-    //     dispatch(fetchMovieDetailById({id:id}))
-    // },[])
+    const [movieDetail, setMovieDetail] = useState([]);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(fetchMovieDetailById({id:id}))
+        .then(res=>{
+            const detail = res?.payload;
+            setMovieDetail(detail)
+        })
+    },[id])
     const theme = useTheme();
     const image = [
         {
@@ -31,27 +34,12 @@ const DetailScreen = ({ navigation,route }) => {
             clock: '13:30'
         }
     ]
-    const topic = [
-        {
-            id: '1',
-            title: 'CRIME'
-        },
-        {
-            id: '2',
-            title: 'DRAMA'
-        },
-        {
-            id: '3',
-            title: 'MYSTERY'
-        }
-    ]
+    
     return (
         <>
-            <StatusBar style='light' />
-            <HeaderDetail navigation={navigation} />
             <SafeAreaView style={styles.container} theme={theme}>
                 <View style={styles.videoBanner}>
-                    <Image style={styles.image} source={images.rectangle7} />
+                    <Image style={styles.image} source={{uri:`https://image.tmdb.org/t/p/w500/${movieDetail.backdrop_path}`}} />
                 </View>
 
                 <View style={styles.description}>
@@ -83,26 +71,20 @@ const DetailScreen = ({ navigation,route }) => {
 
                     </View>
                     <View style={styles.containerTopic}>
-                        {topic?.map((item,index) => {
+                        {movieDetail?.genres?.map((item,index) => {
                             return <TouchableOpacity style={styles.boxTopic} key={index}>
-                                <Text style={styles.textTopic}>{item.title}</Text>
+                                <Text style={styles.textTopic}>{item.name}</Text>
                             </TouchableOpacity>
                         })}
 
                     </View>
                     <ScrollView style={styles.content}>
-                        <Text style={{ color: COLORS.second, fontWeight: "bold", fontSize: 30 }}>Who Am I (2014)</Text>
+                        <Text style={{ color: COLORS.second, fontWeight: "bold", fontSize: 30 }}>{movieDetail.title}</Text>
                         <Text style={{ color: COLORS.second }}>
-                            7.5 | 1.8 Rb Ulasan
+                            {movieDetail.tagline}
                         </Text>
-                        <Text style={{ color: COLORS.second, fontWeight: "500", fontSize: 17, marginTop: 15 }}>SINOPSIS</Text>
                         <Text style={{ color: COLORS.second, fontSize: 12, marginTop: 10 }}>
-                            Lorem Ipsum
-                            is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                            to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                            typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the release of
+                            {movieDetail.overview}
                             
                         </Text>
                     </ScrollView>
@@ -155,6 +137,14 @@ const styles = StyleSheet.create({
     textTopic: {
         color: "#fff",
         fontSize: 12
+    },
+    videoBanner:{
+        width:400,
+        height:250
+    },
+    image:{
+        width:"100%",
+        height:"100%"
     }
 
 })

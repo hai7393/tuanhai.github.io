@@ -1,17 +1,16 @@
-import { View, Text, StyleSheet, Image, useWindowDimensions } from 'react-native'
+import { View, Text,TouchableOpacity, Image, useWindowDimensions } from 'react-native'
 import React, { useState } from 'react'
+import styles from './style';
 import Animated, {
     useSharedValue,
-    useAnimatedStyle,
     useAnimatedScrollHandler,
-    interpolate
 } from 'react-native-reanimated';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from '../../components/Icon'
 import {COLORS} from '../../../contains/theme'
+import { useNavigation } from '@react-navigation/native';
 const CarouselBottom = ({ data }) => {
-    const myIcon = <Icon name="star" size={10} color="yellow" />;
-    // const [newData] = useState([{ key: 'space-left' }, ...data, { key: 'space-right' }]);
     const { width } = useWindowDimensions();
+    const navigation = useNavigation();
     const size = width * 0.6;
     const spacer = (width - size) / 12;
     const x = useSharedValue(0);
@@ -20,6 +19,9 @@ const CarouselBottom = ({ data }) => {
             x.value = event.contentOffset.x;
         }
     })
+    const changeMovie = (id) => {
+        navigation.navigate('DetailScreen', { id })
+    }
     return (
         <>
         <View style={styles.wrapperText}>
@@ -27,6 +29,7 @@ const CarouselBottom = ({ data }) => {
             <Text style={{ color: COLORS.title }}>LIHAT SEMUA</Text>
           </View>
         <Animated.ScrollView
+        scrollEventThrottle={16}
             horizontal
             showsHorizontalScrollIndicator={false}
             bounces={false}
@@ -35,27 +38,24 @@ const CarouselBottom = ({ data }) => {
             onScroll={onScroll}
         >
             {data?.map((item, index) => {
-                const style = useAnimatedStyle(() => {
-                    const scale = interpolate(
-                        x.value,
-                        [(index - 2) * size, (index - 1) * size, index * size],
-                        [0.8, 1, 0.8],
-                    );
-                    return {
-                        transform: [{ scale }],
-                    };
-                })
-                if (!item.backdrop_path) {
-                    return <View style={{ width: spacer }} key={index} />
-                }
                 return (
-                    <View style={{ width: size }} key={index}>
-                        <Animated.View style={[styles.imageContainer,style]}>
+                    <TouchableOpacity style={{ width: size }} 
+                    key={index}
+                    onPress={() => changeMovie(item.id)}
+                    >
+                        <Animated.View style={[styles.imageContainer]}>
                             <Image source={{uri:`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}} style={styles.image} />
                         </Animated.View>
                         <Text style={styles.text1}>{item.title}</Text>
-                        <Text style={styles.text2}>{item.vote_average} {myIcon}</Text>
-                    </View>
+                        <View style={styles.productIcon}>
+                                <TouchableOpacity  style={styles.icon}>
+                                    <Icon name={'heart-o'} number="123" />
+                                </TouchableOpacity>
+                                <View style={styles.icon}>
+                                    <Icon name={'eye'} number="123" />
+                                </View>
+                            </View>
+                    </TouchableOpacity>
                 )
             })}
         </Animated.ScrollView>
@@ -65,32 +65,3 @@ const CarouselBottom = ({ data }) => {
 
 export default CarouselBottom
 
-const styles = StyleSheet.create({
-    imageContainer: {
-        marginTop:8,
-        overflow: 'hidden'
-    },
-    image: {
-        borderRadius:20,
-        width: "90%",
-        height: undefined,
-        aspectRatio: 1,
-    },
-    text1: {
-        color: "#FFFFFF",
-        marginTop: 10,
-        fontSize: 12,
-        fontWeight: "700"
-    },
-    text2: {
-        color: "#FFFFFF",
-        fontSize: 12,
-        fontWeight: "700",
-        lineHeight: 18
-    },
-    wrapperText:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        marginHorizontal:12
-    }
-});

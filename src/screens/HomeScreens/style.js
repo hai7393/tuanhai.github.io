@@ -4,13 +4,9 @@ const styles = StyleSheet.create({
     container: {
         height:height/2,
     },
-    footer: {
-        height: 100,
-        justifyContent:"center",
-        alignItems:"center"
-    },
-
+    
     wrapperTop: {
+        marginTop:30,
         flex: 1,
     },
     wrapperBottom: {
@@ -68,6 +64,34 @@ const styles = StyleSheet.create({
         height: 220,
         borderRadius: 15
     },
+    productIcon : {
+        marginTop:10,
+        flexDirection : 'row'
+    },
+    icon : {
+        marginRight : 10
+    },
+    imageContainer: {
+        marginTop: 10,
+        overflow: 'hidden'
+    },
+    image: {
+        borderRadius: 20,
+        width: "90%",
+        height: undefined,
+        aspectRatio: 1,
+    },
+    text1: {
+        color: "#FFFFFF",
+        marginTop: 10,
+        fontSize: 15,
+        fontWeight: "700"
+    },
+    wrapperText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 12
+    }
 
 })
 export default styles

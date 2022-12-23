@@ -1,7 +1,7 @@
 import { View, StyleSheet,Text,FlatList } from 'react-native'
 import React from 'react'
-import HeaderDetail from '../components/headerDetail'
-import Footer from '../components/footer'
+
+
 const Notification = ({navigation}) => {
     const data = [
         {
@@ -37,7 +37,6 @@ const Notification = ({navigation}) => {
     ]
   return (
     <>
-    <HeaderDetail />
     <View >
       <FlatList
       data={data}
@@ -51,7 +50,6 @@ const Notification = ({navigation}) => {
       }}
       />
     </View>
-    <Footer/>
     </>
   )
 }
