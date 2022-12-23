@@ -7,7 +7,10 @@ import {
   TouchableRipple,
   Switch
 } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 const DrawerContent = (props) => {
+  const navigation = useNavigation();
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView>
@@ -28,9 +31,17 @@ const DrawerContent = (props) => {
             </View>
           </TouchableRipple>
         </Drawer.Section>
+        <Drawer.Section>
+          <TouchableOpacity onPress={()=>navigation.navigate('SignUp')}>
+            <View style={styles.preference}>
+              <Text>Đăng ký</Text>
+            </View>
+          </TouchableOpacity>
+        </Drawer.Section>
       </DrawerContentScrollView>
     </View>
   )
+  
 }
 
 export default DrawerContent

@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../contains'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
+import SignUp from '../screens/signUp'
 const Stack = createStackNavigator();
 const HomeStackScreen = () => {
     const navigation = useNavigation()
@@ -71,6 +72,12 @@ const HomeStackScreen = () => {
             <Stack.Screen name="SearchScreen" component={SearchScreen}
                 options={{
                     title: 'Tìm kiếm',
+                    
+                }}
+            />
+            <Stack.Screen name="SignUp" component={SignUp}
+                options={{
+                    title: 'Đăng ký',
                     
                 }}
             />
