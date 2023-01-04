@@ -15,8 +15,7 @@ import {
 import { MD2DarkTheme } from 'react-native-paper';
 import { MD2LightTheme } from 'react-native-paper';
 import merge from 'deepmerge';
-import HomeScreens from '../screens/HomeScreens/HomeScreens';
-import DetailScreen from '../screens/DetailScreens/DetailScreen';
+import DetailScreen from '../screens/DetailScreens';
 import Notification from '../screens/Notification';
 import TabNavigation from './TabNavigation';
 const Drawer = createDrawerNavigator();

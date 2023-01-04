@@ -1,7 +1,7 @@
 import { StyleSheet , Dimensions, Platform , StatusBar } from 'react-native';
 
 const height = Platform.OS === 'android' ? Dimensions.get('screen').height - StatusBar.currentHeight :  Dimensions.get('screen').height
-import { COLORS } from '../../../contains'
+import { COLORS , FONTSIZE } from '../../../contains'
 
 
 const styles = StyleSheet.create({
@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
         paddingRight : 60
     },
     formTitle : {
-        fontSize : 36,
+        fontSize : FONTSIZE.h1,
         fontWeight : 'bold',
         position : 'absolute',
         left : 20,
         color : COLORS.title
     },
         formInput : {
-        marginTop : 10,
+        marginTop : 30,
     },
     textInput: {
         marginTop : 10,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         position : 'absolute',
         bottom : 22,
         left : 10,
-        fontSize : 16
+        fontSize : FONTSIZE.h2
       },
       footerSubmit : {
         position : 'absolute',

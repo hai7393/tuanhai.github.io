@@ -9,7 +9,13 @@ const COLORS = {
     bgHeader    : 'rgba(28, 27, 31, 1)',
     bgFooter    : '#FF985F',
 }
-
+const FONTSIZE = {
+    welcome : 50,
+    infoName : 34,
+    h1 : 36,
+    h2 : 16,
+    h3 : 14,
+}
 export {
-    COLORS
+    COLORS,FONTSIZE
 }

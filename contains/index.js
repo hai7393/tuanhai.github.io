@@ -1,6 +1,6 @@
-import { COLORS } from './theme'
-
+import { COLORS,FONTSIZE } from './theme'
+import { MESSAGE } from './define'
 
 export {
-    COLORS
+    COLORS,FONTSIZE,MESSAGE
 }

@@ -1,5 +1,5 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
+import React, { useContext } from 'react'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import { StyleSheet } from 'react-native';
 import {
@@ -7,9 +7,17 @@ import {
   TouchableRipple,
   Switch
 } from 'react-native-paper';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { Entypo } from '@expo/vector-icons';
+import { AuthContext } from '../navigations/AuthProvider';
+import { SimpleLineIcons } from '@expo/vector-icons'
+import { COLORS } from '../../contains'
 const DrawerContent = (props) => {
+  const { user, logout } = useContext(AuthContext);
+  const Logout = () => {
+    logout();
+    navigation.navigate('HomeScreens')
+  }
   const navigation = useNavigation();
   return (
     <View style={{ flex: 1 }}>
@@ -26,22 +34,27 @@ const DrawerContent = (props) => {
             <View style={styles.preference}>
               <Text>Dark Theme</Text>
               <View pointerEvents="none">
-                <Switch value={props.isDarkTheme}/>
+                <Switch value={props.isDarkTheme} />
               </View>
             </View>
           </TouchableRipple>
         </Drawer.Section>
-        <Drawer.Section>
-          <TouchableOpacity onPress={()=>navigation.navigate('SignUp')}>
-            <View style={styles.preference}>
-              <Text>Đăng ký</Text>
-            </View>
-          </TouchableOpacity>
-        </Drawer.Section>
       </DrawerContentScrollView>
+      {/* logout */}
+      <View style={styles.bottomDrawerSection} >
+        {user ? (
+          <TouchableOpacity onPress={Logout}>
+            <SimpleLineIcons name="logout" size={18} color={COLORS.second}  > Logout</SimpleLineIcons>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+            <Entypo name="login" size={18} color={COLORS.second} > Login</Entypo>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   )
-  
+
 }
 
 export default DrawerContent
@@ -78,15 +91,14 @@ const styles = StyleSheet.create({
   drawerSection: {
     marginTop: 15,
   },
-  bottomDrawerSection: {
-      marginBottom: 15,
-      borderTopColor: '#f4f4f4',
-      borderTopWidth: 1
-  },
   preference: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 12,
     paddingHorizontal: 16,
   },
+  bottomDrawerSection: {
+    marginBottom: 25,
+    marginLeft:18
+  }
 });

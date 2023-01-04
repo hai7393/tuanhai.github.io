@@ -20,7 +20,7 @@ const movieSeen = seen.map(itemID => movieTopRated?.results.find(item => item.id
   const renderEmpty = () => {
     return (
       <View>
-        <Text>Danh sách đang rỗng!</Text>
+        <Text style={{color:"#fff"}}>Danh sách đang rỗng!</Text>
       </View>
     )
   }

@@ -14,6 +14,10 @@ const rectangle9    = require('../assets/images/icon/9.png');
 const rectangle10    = require('../assets/images/icon/10.png');
 const iconMenu    = require('../assets/images/icon/fe_app-menu.png');
 const iconDot = require('../assets/images/icon/gach.png');
+const headerLogin = require('../assets/images/backgroundHeader.png');
+const footerLogin = require('../assets/images/backgroundFooter.png');
+const imgDefault  = require('../assets/images/avatar_default.png');
+const iconLogin   = require('../assets/images/icon.png');
 
 export default  {
     background,
@@ -31,5 +35,9 @@ export default  {
     rectangle9,
     rectangle10,
     iconMenu,
-    iconDot
+    iconDot,
+    headerLogin,
+    footerLogin,
+    imgDefault,
+    iconLogin
 }
