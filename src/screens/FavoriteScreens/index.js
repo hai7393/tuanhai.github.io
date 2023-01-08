@@ -7,7 +7,6 @@ const FavoriteScreen = () => {
   const favorite = useSelector(state => state.movie.item);
   const movieTopRated = useSelector(state => state.movie.movieTopRated)
   const movieFavorite = favorite.map(itemID => movieTopRated?.results.find(item => item.id == itemID))
-
   const renderItem = ({ item }) => {
     return (
       <TopRated
@@ -19,8 +18,8 @@ const FavoriteScreen = () => {
   }
   const renderEmpty = () => {
     return (
-      <View>
-        <Text>Danh sách đang rỗng!</Text>
+      <View >
+        <Text style={{color:"#fff"}}>Danh sách đang rỗng!</Text>
       </View>
     )
   }

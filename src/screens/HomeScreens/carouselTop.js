@@ -1,5 +1,5 @@
 import { View, Text, useWindowDimensions, Image, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import styles from './style';
 import Animated, {
     useSharedValue,
@@ -12,7 +12,9 @@ import { useDispatch } from 'react-redux';
 import { toggleFavorite } from '../../../store/slices/movie';
 import { toggleSeen } from '../../../store/slices/movie';
 import { useSelector } from 'react-redux';
+import { AuthContext } from '../../navigations/AuthProvider';
 const CarouselTop = ({ data }) => {
+
     const favorite = useSelector(state => state.movie.item);
     const seen = useSelector(state => state.movie.seen);
     const dispatch = useDispatch();
@@ -37,9 +39,13 @@ const CarouselTop = ({ data }) => {
     }
     return (
         <>
+
             <View style={styles.wrapperText}>
-                <Text style={{ color: COLORS.second }}>BARU TAYANG HARI INI</Text>
-                <Text style={{ color: COLORS.title }}>LIHAT SEMUA</Text>
+                <View>
+                    <Text style={{ color: COLORS.title, fontWeight: "bold" }}>TOP RATED</Text>
+                    <Text style={{ width: 60, height: 5, backgroundColor: COLORS.bgFooter, marginTop: 5 }}></Text>
+                </View>
+                <Text style={{ color: COLORS.primary }}>See all</Text>
             </View>
             <Animated.ScrollView
                 scrollEventThrottle={16}
@@ -51,12 +57,12 @@ const CarouselTop = ({ data }) => {
                 onScroll={onScroll}
             >
                 {data?.map((item, index) => {
-                    const isFavorite    = favorite.includes(item.id);
-                    const iconFavorite  = isFavorite ? "heart" : "heart-o";
-                    const numberFavorite = isFavorite? item.id+1:item.id
-                    const isSeen    = seen.includes(item.id);
-                    const iconSeen  = isSeen ? "eye" : "eye-slash";
-                    const numberSeen = isSeen? item.id+1:item.id
+                    const isFavorite = favorite.includes(item.id);
+                    const iconFavorite = isFavorite ? "heart" : "heart-o";
+                    const numberFavorite = isFavorite ? item.id + 1 : item.id
+                    const isSeen = seen.includes(item.id);
+                    const iconSeen = isSeen ? "eye" : "eye-slash";
+                    const numberSeen = isSeen ? item.id + 1 : item.id
                     if (!item.backdrop_path) {
                         return <View style={{ width: spacer }} key={index} />
                     }
@@ -74,7 +80,7 @@ const CarouselTop = ({ data }) => {
                                 <TouchableOpacity style={styles.icon} onPress={() => changeFavorite(item.id)}>
                                     <Icon name={iconFavorite} number={numberFavorite} />
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.icon} onPress={()=>changeSeen(item.id)}>
+                                <TouchableOpacity style={styles.icon} onPress={() => changeSeen(item.id)}>
                                     <Icon name={iconSeen} number={numberSeen} />
                                 </TouchableOpacity>
                             </View>

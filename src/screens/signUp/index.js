@@ -25,8 +25,9 @@ const SignUpScreen = () => {
   };
   
   const signUp = () => {
-    if(password === confirmPassword){
+    if(password === confirmPassword && password!==""){
       register(email,password)
+      navigation.navigate('LoginScreen')
     }else {
       showNotice(MESSAGE.passwordConfirm,true)
     }

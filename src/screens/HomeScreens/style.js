@@ -1,12 +1,14 @@
 import { Dimensions, StyleSheet } from "react-native";
 const height = Dimensions.get('window').height - 120;
+const width = Dimensions.get('window').width - 30;
+import { COLORS } from '../../../contains'
 const styles = StyleSheet.create({
     container: {
-        height:height/2,
+        height: height / 3,
     },
-    
+
     wrapperTop: {
-        marginTop:30,
+        marginTop: 20,
         flex: 1,
     },
     wrapperBottom: {
@@ -64,12 +66,12 @@ const styles = StyleSheet.create({
         height: 220,
         borderRadius: 15
     },
-    productIcon : {
-        marginTop:10,
-        flexDirection : 'row'
+    productIcon: {
+        marginTop: 10,
+        flexDirection: 'row'
     },
-    icon : {
-        marginRight : 10
+    icon: {
+        marginRight: 10
     },
     imageContainer: {
         marginTop: 10,
@@ -91,6 +93,64 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal: 12
+    },
+    containerMarquee: {
+        justifyContent: 'center',
+        width: "100%",
+        height: 20,
+        alignItems: "center"
+    },
+    box: {
+        flex: 1,
+        marginTop:20,
+        width:width
+    },
+    containerMovieList:{
+        flex : 1,
+        marginLeft:12,
+        width:width
+    },
+    containerMovie : {
+        flex : 1,
+        flexDirection : 'row',
+        //justifyContent : 'center',
+        //alignItems : 'center',
+        //backgroundColor : COLORS.second,
+        marginBottom : 15,
+        borderRadius : 15,
+        width:550,
+        
+    },
+    boxImg : {
+        flex : 1,
+        height:150
+    },
+    img : {
+        width : '100%',
+        height : '100%',
+        borderTopLeftRadius : 15,
+        borderBottomLeftRadius : 15,
+        resizeMode : 'cover'
+    },
+    boxContent : {
+        flex : 1.5,
+        padding : 12,
+    },
+    title : {
+        fontWeight : 'bold',
+        fontSize : 14,
+        color : COLORS.second,
+        marginBottom : 20,
+        
+    },
+    time : {
+        marginTop:-15
+    },
+    voteAverage:{
+        flexDirection : 'row',
+    },
+    timeText : {
+        color : COLORS.icon
     }
 
 })

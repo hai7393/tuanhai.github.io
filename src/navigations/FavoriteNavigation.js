@@ -6,6 +6,7 @@ import FavoriteScreen from '../screens/FavoriteScreens';
 import { useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import DetailScreen from '../screens/DetailScreens';
 const FavoriteStack = createStackNavigator();
 const FavoriteStackScreen = () => {
     return (
@@ -22,6 +23,21 @@ const FavoriteStackScreen = () => {
           component={FavoriteScreen}
           options={{
             title : 'Phim Yêu thích',
+            headerRight : () => (
+                <>
+                        <View style={{flexDirection:"row", marginRight:10}}>
+                            <Ionicons name="search-outline" style={{ marginRight: 5 }} size={24} color={COLORS.second} />
+                            <MaterialCommunityIcons name="dots-vertical" size={24} color={COLORS.second} />
+                        </View>
+                    </>
+            )
+          }}
+          />
+          <FavoriteStack.Screen
+          name="DetailScreen"
+          component={DetailScreen}
+          options={{
+            title : 'Chi tiết',
             headerRight : () => (
                 <>
                         <View style={{flexDirection:"row", marginRight:10}}>

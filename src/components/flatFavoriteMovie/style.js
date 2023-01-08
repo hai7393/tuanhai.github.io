@@ -25,6 +25,12 @@ const styles = StyleSheet.create({
         color:COLORS.second,
         fontSize:18
        
+    },
+    leftAction:{
+        backgroundColor:"red",
+        justifyContent:"center",
+        alignItems:"center",
+        
     }
 })
 

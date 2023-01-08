@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import LoginScreen from '../screens/Login';
 import SignUpScreen from '../screens/SignUp';
+import InfoScreen from '../screens/Infor';
 const Stack = createStackNavigator();
 const HomeStackScreen = () => {
     const navigation = useNavigation()
@@ -83,6 +84,12 @@ const HomeStackScreen = () => {
                 }}
             />
             <Stack.Screen name="SignUpScreen" component={SignUpScreen} 
+             options={{
+                headerShown: false,
+                tabBarVisible:true
+            }}
+            />
+            <Stack.Screen name="InfoScreen" component={InfoScreen} 
              options={{
                 headerShown: false,
                 tabBarVisible:true

@@ -5,12 +5,8 @@ import {showNotice} from '../../lib'
 import {MESSAGE} from '../../contains'
 export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
-    //const navigation   = useNavigation();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
-    // const nextLogin = () => {
-    //     navigation.navigate('LoginScreen')
-    //   }
     return (
         <AuthContext.Provider
             value={{
@@ -56,6 +52,17 @@ export const AuthProvider = ({ children }) => {
                       });
                     setLoading(false);
 
+                },
+                updateInfo: async(displayName) => {
+                    setLoading(true);
+                    await auth.currentUser.updateProfile({
+                        displayName:displayName
+                    }).then(()=>{
+
+                    }).catch((error)=>{
+                        showNotice(error.message,true)
+                    })
+                    setLoading(false);
                 }
             }}
         >

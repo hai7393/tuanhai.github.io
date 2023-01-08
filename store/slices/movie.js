@@ -37,12 +37,12 @@ const movieSlice = createSlice({
     movieTopRated: [],
     moviePopular: [],
     item: [],
-    seen:[],
-    search:[]
+    seen: [],
+    search: [],
   },
   reducers: {
     toggleFavorite: (state, action) => {
-      const {id} = action.payload
+      const { id } = action.payload
       const item = state.item.find(item => item === id)
       if (item) {
         state.item = state.item.filter(item => item !== id)
@@ -52,13 +52,23 @@ const movieSlice = createSlice({
       return state
     },
     toggleSeen: (state, action) => {
-      const {id} = action.payload 
+      const { id } = action.payload
       const seen = state.seen.find(item => item === id)
       if (seen) {
         state.seen = state.seen.filter(item => item !== id)
       } else {
         state.seen = [...new Set([id, ...state.seen])]
       }
+      return state
+    },
+    removeMovieFavorite: (state, action) => {
+      const { id } = action.payload
+      state.item = state.item.filter(item => item !== id)
+      return state
+    },
+    removeMovieSeen: (state, action) => {
+      const { id } = action.payload
+      state.seen = state.seen.filter(item => item !== id)
       return state
     },
   },
@@ -91,6 +101,6 @@ const movieSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { toggleFavorite,toggleSeen } = movieSlice.actions
+export const { toggleFavorite, toggleSeen, removeMovieFavorite,removeMovieSeen } = movieSlice.actions
 
 export default movieSlice.reducer

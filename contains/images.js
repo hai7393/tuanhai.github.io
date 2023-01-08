@@ -18,7 +18,8 @@ const headerLogin = require('../assets/images/backgroundHeader.png');
 const footerLogin = require('../assets/images/backgroundFooter.png');
 const imgDefault  = require('../assets/images/avatar_default.png');
 const iconLogin   = require('../assets/images/icon.png');
-
+const video =require('../assets/video/movie1.mp4');
+ 
 export default  {
     background,
     iconFunny,
@@ -39,5 +40,6 @@ export default  {
     headerLogin,
     footerLogin,
     imgDefault,
-    iconLogin
+    iconLogin,
+    video
 }
