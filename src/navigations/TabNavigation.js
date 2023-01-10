@@ -7,10 +7,15 @@ import FavoriteStackScreen from './FavoriteNavigation'
 import SeenStackScreen from './SeenNavigation'
 import { AuthContext } from './AuthProvider'
 import AuthStackScreen from './Auth'
-import InfoStackScreen from './Infor'
+import InfoStackScreen from './Infor';
+import { useSelector } from 'react-redux'
 const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   const { user } = useContext(AuthContext);
+  const seen = useSelector(state => state.movie.seen);
+  const favorite = useSelector(state => state.movie.item);
+  const seen_unread_count = seen.length;
+  const favorite_unread_count = favorite.length;
   return (
     <Tab.Navigator
       initialRouteName='HomeScreens'
@@ -53,8 +58,14 @@ const TabNavigation = () => {
       })}
     >
       <Tab.Screen name="HomeScreen" component={HomeStackScreen} options={{ title: 'Trang chủ' }} />
-      <Tab.Screen name="Seen" component={SeenStackScreen} options={{ title: 'Đã xem' }} />
-      <Tab.Screen name="Favorite" component={FavoriteStackScreen} options={{ title: 'Yêu thích' }} />
+      <Tab.Screen name="Seen" component={SeenStackScreen} options={{
+        title: 'Đã xem',
+        tabBarBadge: seen_unread_count
+      }} />
+      <Tab.Screen name="Favorite" component={FavoriteStackScreen} options={{
+        title: 'Yêu thích',
+        tabBarBadge: favorite_unread_count
+      }} />
       {user ? (
         <Tab.Screen name="Infor" component={InfoStackScreen} options={() => ({
           title: user.displayName

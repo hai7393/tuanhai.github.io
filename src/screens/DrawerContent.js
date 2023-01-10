@@ -40,18 +40,6 @@ const DrawerContent = (props) => {
           </TouchableRipple>
         </Drawer.Section>
       </DrawerContentScrollView>
-      {/* logout */}
-      <View style={styles.bottomDrawerSection} >
-        {user ? (
-          <TouchableOpacity onPress={Logout}>
-            <SimpleLineIcons name="logout" size={18} color={COLORS.second}  > Logout</SimpleLineIcons>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-            <Entypo name="login" size={18} color={COLORS.second} > Login</Entypo>
-          </TouchableOpacity>
-        )}
-      </View>
     </View>
   )
 
